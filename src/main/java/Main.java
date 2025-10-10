@@ -18,12 +18,12 @@ public class Main {
             } else if (choice.equalsIgnoreCase("L")) {
                 System.out.println("ledger method");
             } else if (choice.equalsIgnoreCase("X")) {
+                System.out.println("You've chosen to exit the program, Good Bye! ");
                 running = false;
             }else {
                 System.err.println("invalid or empty selection detected");
-                continue;
-
             }
+
         }
 
 
