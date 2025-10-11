@@ -5,7 +5,7 @@ public class Main {
         //a scanner prompt to collect users' menu choice
         Scanner userMenu = new Scanner(System.in);
 
-
+        //a while loop to run the menu window until it's exited
         boolean running = true;
         while(running){
             System.out.println("What do you want to do today?\n D) Add deposit \n P) Make Payment \n L) Ledger \n X) Exit");
@@ -20,7 +20,9 @@ public class Main {
             } else if (choice.equalsIgnoreCase("X")) {
                 System.out.println("You've chosen to exit the program, Good Bye! ");
                 running = false;
-            }else {
+            }
+            // error statement for invalid or no entries
+            else {
                 System.err.println("invalid or empty selection detected");
             }
 
