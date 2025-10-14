@@ -8,6 +8,7 @@ public class Transaction {
     private String description;
     private String vendor;
     private double amount;
+    // constructor to build the objects
 
     public Transaction(LocalDate date, LocalTime currentTime, String description, String vendor, double amount) {
         this.date = date;
@@ -16,6 +17,7 @@ public class Transaction {
         this.vendor = vendor;
         this.amount = amount;
     }
+    // getters to allow the user access the private fields in an encapsulated manner
 
     public LocalDate getDate() {
         return date;
@@ -36,6 +38,7 @@ public class Transaction {
     public double getAmount() {
         return amount;
     }
+    // Compiles the entries into the required transaction format
     public String toString () {
         return date + "|" + currentTime + "|" + description + "|" + vendor +"|" + amount ;
     }
