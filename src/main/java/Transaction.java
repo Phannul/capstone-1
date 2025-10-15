@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     //private fields for encapsulation
@@ -44,8 +45,9 @@ public class Transaction {
         return date + "|" + currentTime + "|" + description + "|" + vendor +"|" + amount ;
     }
     // A method to combine the date and time fields together so that it could be easy to compare both of them
-    public LocalDateTime getDateTime(){
-        return LocalDateTime.of(date, currentTime);
-    }
+//    public LocalDateTime getDateTime(){
+//       return LocalDateTime.of(returnDate(), returnTime());
+//    }
+
 }
 
