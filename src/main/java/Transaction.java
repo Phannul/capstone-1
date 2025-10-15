@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Transaction {
@@ -41,6 +42,10 @@ public class Transaction {
     // Compiles the entries into the required transaction format
     public String toString () {
         return date + "|" + currentTime + "|" + description + "|" + vendor +"|" + amount ;
+    }
+    // A method to combine the date and time fields together so that it could be easy to compare both of them
+    public LocalDateTime getDateTime(){
+        return LocalDateTime.of(date, currentTime);
     }
 }
 

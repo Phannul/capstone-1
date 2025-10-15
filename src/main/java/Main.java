@@ -2,21 +2,23 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //a scanner prompt to collect users' menu choice
-        Scanner userMenu = new Scanner(System.in);
+        //Al scanner prompt to collect users' menu choice
+        Scanner userMenuInput = new Scanner(System.in);
 
-        //a while loop to run the menu window until it's exited
+        //A while loop to run the menu window until it's exited
         boolean running = true;
         while(running){
             System.out.println("What do you want to do today?\n D) Add deposit \n P) Make Payment \n L) Ledger \n X) Exit");
-            String choice = userMenu.nextLine().trim();
+            String choice = userMenuInput.nextLine().trim();
             if(choice.equalsIgnoreCase("D")){
                 System.out.println("Deposit method");
             } else if (choice.equalsIgnoreCase("P")) {
                 System.out.println("Payment Method");
 
             } else if (choice.equalsIgnoreCase("L")) {
-                System.out.println("ledger method");
+                Ledger ledger = new Ledger();
+                ledger.ledgerMenuPrompter(userMenuInput);
+                //the ledger screen
             } else if (choice.equalsIgnoreCase("X")) {
                 System.out.println("You've chosen to exit the program, Good Bye! ");
                 running = false;
