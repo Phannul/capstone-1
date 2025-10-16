@@ -12,14 +12,7 @@ public class Main {
     static Scanner myScanner = new Scanner(System.in);
     // The path of the csv file declared as a field to grant access to every method
     static String path = "src/main/resources/transactions.csv";
-    // The needed print structure declared in a class level to be called from any needed method
-    public static void printTransactions() {
 
-        for (Transaction transaction : transactionList) {
-
-            System.out.printf("%s %s %s %s %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
-        }
-    }
 
 
 
@@ -29,20 +22,19 @@ public class Main {
         mainMenu();
 
 
-
     }
 
     public static void mainMenu() {
         boolean working = true;
         //while loop to iterate the main menu until it's exited
-        while(working){
+        while (working) {
             String prompt = """
-                Enter a choice:
-                D) Deposit
-                P) Payment
-                L) Ledger menu
-                X)
-                """;
+                    Enter a choice:
+                    D) Deposit
+                    P) Payment
+                    L) Ledger menu
+                    X) Exit
+                    """;
             System.out.println(prompt);
             String userInput = myScanner.nextLine();
 
@@ -69,8 +61,13 @@ public class Main {
         }
 
     }
+    /* A parametrized method that
 
-    public static void makeTransactions(boolean isPositive) {
+     */
+    public static void makeTransactions(boolean isDeposit) {
+        /* using a scanner to create the prompter that asks the user to input
+        the needed information
+         */
         System.out.println("Enter date:");
         String userInput = myScanner.nextLine();
         LocalDate date = LocalDate.parse(userInput);
@@ -84,41 +81,37 @@ public class Main {
         System.out.println("Enter amount");
         userInput = myScanner.nextLine();
         double amount = Double.parseDouble(userInput);
-        if (!isPositive){
+        /* a conditional statement that changes the signs of the amount during payments
+        and keeps it positive if it's a deposit
+         */
+        if (isDeposit == false) {
             amount = amount * -1;
         }
-
+        //A transaction type variable that compiles the user inputs and able to be added into the array list
         Transaction newTransaction = new Transaction(date, time, description, vendor, amount);
         transactionList.add(newTransaction);
 
-
-
-        //writeTransactionFile();
-        try(FileWriter writer = new FileWriter(path, true)) {
-            BufferedWriter bufferedWriter = new BufferedWriter(writer);
-            String tranString = String.valueOf(date) + "|" + String.valueOf(time) + "|" + description + "|" + vendor + "|" + amount;
-            bufferedWriter.write(tranString);
-            bufferedWriter.newLine();
-            bufferedWriter.close();
+        //A writer that write the entered information into the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
+            String transactionFormat = String.valueOf(date) + "|" + String.valueOf(time) + "|" + description + "|" + vendor + "|" + amount + "\n";
+            writer.write(transactionFormat);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-
+    //A menu prompter for the ledger submenu
     public static void ledgerMenuPrompter(Scanner myScanner) {
-
-
         boolean running = true;
         while (running) {
-            System.out.println("A) ALL\nD) Deposits\nP) Payments \nR) Reports\nH) Home ");
+            System.out.println("What do you want to see \nA) All Transactions\nD) Deposits\nP) Payments \nR) Reports\nH) Home ");
             String choice = myScanner.nextLine();
             if (choice.equalsIgnoreCase("A")) {
                 printTransactions();
             } else if (choice.equalsIgnoreCase("D")) {
-                System.out.println("showDeposits");
+                printDeposits();
             } else if (choice.equalsIgnoreCase("P")) {
-                System.out.println("showPayments");
+                printPayments();
             } else if (choice.equalsIgnoreCase("R")) {
 //                showReports();
             } else if (choice.equalsIgnoreCase("H")) {
@@ -150,10 +143,30 @@ public class Main {
 
             }
         } catch (Exception e) {
-            System.err.println("Error2: " + e);
+            System.err.println("Error: " + e);
         }
         return transactionList;
+    }
+    public static void printTransactions() {
 
+        for (Transaction transaction : transactionList) {
+
+            System.out.printf("%s | %s | %s | %s | %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+        }
+    }
+    public static void printDeposits(){
+        for (Transaction transaction : transactionList ) {
+            if (transaction.getAmount() > 0) {
+                System.out.printf("%s | %s | %s | %s | %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            }
+        }
+    }
+    public static void printPayments(){
+        for (Transaction transaction : transactionList) {
+            if (transaction.getAmount() < 0){
+                System.out.printf("%s | %s | %s | %s | %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            }
+        }
     }
 
 

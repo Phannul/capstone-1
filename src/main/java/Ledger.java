@@ -10,63 +10,63 @@ public class Ledger {
         this.transactionList = new ArrayList<>();
     }
 
-    public void addTransaction(Transaction transaction) {
-        transactionList.add(transaction);
-        // commands deposit and payment
-    }
-
-    // shows every transaction
-    public void showEverything() {
-        //a conditional statement to notify users if the list is empty
+//    public void addTransaction(Transaction transaction) {
+//        transactionList.add(transaction);
+//        // commands deposit and payment
+//    }
+//
+//    // shows every transaction
+//    public void showEverything() {
+//        //a conditional statement to notify users if the list is empty
+////        if (transactionList.isEmpty()) {
+////            System.out.println("No Transaction History Found");
+////            return;
+////        }
+//
+//        // A for loop to iterate through all the objects in the transaction class
+////        for (Transaction t : transactionList) {
+////            System.out.printf("%s %s %.2f" + "$" + "%s %s \n", t.getDate(), t.getCurrentTime(), t.getAmount(), t.getVendor(), t.getDescription());
+////        }
+//
+//
+//    }
+//
+//    // shows deposited lists
+//    public void showDeposits() {
+//        System.out.println("showing all Deposits ...");
+//        // A conditional statement to notify the user they have not deposited any money yet
 //        if (transactionList.isEmpty()) {
-//            System.out.println("No Transaction History Found");
+//            System.out.println("No Recorded Deposits yet");
 //            return;
 //        }
-
-        // A for loop to iterate through all the objects in the transaction class
+//        //Sorts deposits in a timely manner
+//
+//        // Filters only positive transactions so that it can only show deposited amount
 //        for (Transaction t : transactionList) {
-//            System.out.printf("%s %s %.2f" + "$" + "%s %s \n", t.getDate(), t.getCurrentTime(), t.getAmount(), t.getVendor(), t.getDescription());
+//            if (t.getAmount() > 0) {
+//                System.out.println(t.toString());
+//            } else {
+//                System.out.println(" No Recorded Deposits yet");
+//            }
 //        }
-
-
-    }
-
-    // shows deposited lists
-    public void showDeposits() {
-        System.out.println("showing all Deposits ...");
-        // A conditional statement to notify the user they have not deposited any money yet
-        if (transactionList.isEmpty()) {
-            System.out.println("No Recorded Deposits yet");
-            return;
-        }
-        //Sorts deposits in a timely manner
-
-        // Filters only positive transactions so that it can only show deposited amount
-        for (Transaction t : transactionList) {
-            if (t.getAmount() > 0) {
-                System.out.println(t.toString());
-            } else {
-                System.out.println(" No Recorded Deposits yet");
-            }
-        }
-    }
-
-    //shows only payment or credited amounts
-    public void showPayments() {
-        // a conditional statement to address an empty transaction list
-        if (transactionList.isEmpty()) {
-            System.out.println("There are No payments credited");
-        }
-//        transactionList.sort(
-//                (t1, t2) -> t2.getDateTime().compareTo(t1.getDateTime())
-//        );
-        for (Transaction t : transactionList) {
-            if (t.getAmount() < 0) {
-                System.out.println(t.toString());
-            }
-        }
-
-    }
+//    }
+//
+//    //shows only payment or credited amounts
+//    public void showPayments() {
+//        // a conditional statement to address an empty transaction list
+//        if (transactionList.isEmpty()) {
+//            System.out.println("There are No payments credited");
+//        }
+////        transactionList.sort(
+////                (t1, t2) -> t2.getDateTime().compareTo(t1.getDateTime())
+////        );
+//        for (Transaction t : transactionList) {
+//            if (t.getAmount() < 0) {
+//                System.out.println(t.toString());
+//            }
+//        }
+//
+//    }
 
     //shows reports of the desired timeline
     public void showReports(Scanner userMenuInput) {
