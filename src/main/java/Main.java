@@ -1,6 +1,5 @@
 import java.io.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +44,6 @@ public class Main {
                 case "L":
                     ledgerMenuPrompter(myScanner);
                     break;
-
                 case "X":
                     working = false;
                     System.out.println("You have chosen to exit the menu");
@@ -54,7 +52,6 @@ public class Main {
                     System.out.println("invalid entry, Try Again");
             }
         }
-
     }
     /* A parametrized method that
 
@@ -107,15 +104,12 @@ public class Main {
             } else if (choice.equalsIgnoreCase("P")) {
                 printPayments();
             } else if (choice.equalsIgnoreCase("R")) {
-//                showReports();
+                showReports(myScanner);
             } else if (choice.equalsIgnoreCase("H")) {
                 running = false;
-
             } else {
                 System.err.println("Invalid selection or empty entry");
             }
-
-
         }
     }
     public static ArrayList<Transaction> readTransactionFile(String path) {
@@ -132,7 +126,6 @@ public class Main {
                 double amount = Double.parseDouble(section[4]);
                 Transaction transactions = new Transaction(date, time, description, vendor, amount);
                 transactionList.add(transactions);
-
             }
         } catch (Exception e) {
             System.err.println("Error with the reader: " + e);
@@ -146,7 +139,6 @@ public class Main {
             System.out.printf("%s | %s | %s | %s | %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
         }
     }
-
     public static void printDeposits() {
         for (Transaction transaction : transactionList) {
             if (transaction.getAmount() > 0) {
@@ -161,6 +153,62 @@ public class Main {
             }
         }
     }
+    public static void showReports(Scanner myScanner) {
+        boolean running = true;
+        while (running) {
+            System.out.println(" Choose Filter: \n 1) Month To Date \n 2) Previous Month \n 3) Year to Date \n 4) Previous Year \n 5) Search by Vendor \n 0) Back");
+            String choice = myScanner.nextLine();
+            int menuChoice = Integer.parseInt(choice);
+            switch (menuChoice) {
+                case 1:
+                    //showMonthToDate();
+                    break;
+                case 2:
+                    showPreviousMonth();
+                    break;
+                case 3:
+                    //showYearToDate();
+                    break;
+                case 4:
+                    showPreviousYear();
+                    break;
+                case 5:
+                    //searchByVendorName();
+                    break;
+                case 0:
+                    running = false;
+                    break;
+                default:
+                    System.err.println("Invalid Selection or Empty Entry");
+            }
+        }
+    }
+    public static void showPreviousMonth(){
+        LocalDate today = LocalDate.now();
+        int thisMonth = today.getMonthValue();
+        int lastMonth = thisMonth - 1;
+        System.out.println("Transaction for Month " + );
+        for (Transaction transaction : transactionList){
+            int transactionMonth = transaction.getDate().getMonthValue();
+            if (transactionMonth == lastMonth){
+                System.out.printf("%s | %s | %s | %s | %.2f", transaction.getDate(), transaction.getCurrentTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+            }
+        }
+
+    }
+    public static void showPreviousYear() {
+        LocalDate today = LocalDate.now();
+        int currentYear = today.getYear();
+        int lastYear = currentYear - 1;
+        System.out.println(" Transaction for" + lastYear);
+       for(Transaction transaction : transactionList) {
+           int transactionYear = transaction.getDate().getYear();
+           if(transactionYear == lastYear) {
+               System.out.printf("%s | %s | %s | %s | %.2f", transaction.getDate(), transaction.getCurrentTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+           }
+       }
+   }
+
 
 
 }

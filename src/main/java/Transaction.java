@@ -58,11 +58,5 @@ public class Transaction implements Comparable<Transaction> {
             return this.currentTime.compareTo(otherTransaction.currentTime) * -1;
         }
     }
-
-    // A method to combine the date and time fields together so that it could be easy to compare both of them
-//    public LocalDateTime getDateTime(){
-//       return LocalDateTime.of(returnDate(), returnTime());
-//    }
-
 }
 
