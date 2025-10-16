@@ -133,29 +133,6 @@ public class Ledger {
 
     }
 
-    public void ledgerMenuPrompter(Scanner userMenuInput) {
-        boolean running = true;
 
-
-        while (running) {
-            System.out.println("A) ALL\nD) Depostis\nP) Payments \nR) Reports\nH) Home ");
-            String choice = userMenuInput.nextLine();
-            if (choice.equalsIgnoreCase("A")) {
-                showEverything();
-            } else if (choice.equalsIgnoreCase("D")) {
-                showDeposits();
-            } else if (choice.equalsIgnoreCase("P")) {
-                showPayments();
-            } else if (choice.equalsIgnoreCase("R")) {
-//                showReports();
-            } else if (choice.equalsIgnoreCase("H")) {
-                running = false;
-            } else {
-                System.err.println("Invalid selection or empty entry");
-            }
-
-
-        }
-    }
 
 }
