@@ -173,7 +173,7 @@ public class Main {
                     showPreviousYear();
                     break;
                 case 5:
-                    //searchByVendorName();
+                    searchByVendorName();
                     break;
                 case 0:
                     running = false;
@@ -236,6 +236,16 @@ public class Main {
        for(Transaction transaction : transactionList) {
            int transactionYear = transaction.getDate().getYear();
            if(transactionYear == lastYear) {
+               System.out.printf("%s | %s | %s | %s | %.2f", transaction.getDate(), transaction.getCurrentTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+           }
+       }
+   }
+   public static void searchByVendorName() {
+       System.out.println("Enter the vendor's name: ");
+       String input = myScanner.nextLine();
+       for (Transaction transaction : transactionList){
+           String desiredVendor = transaction.getVendor();
+           if (input.equalsIgnoreCase(desiredVendor)){
                System.out.printf("%s | %s | %s | %s | %.2f", transaction.getDate(), transaction.getCurrentTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
            }
        }
