@@ -1,10 +1,10 @@
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
-
-
 public class Main {
     //An array list to hold all the transactions
     private static ArrayList<Transaction> transactionList;
@@ -13,17 +13,12 @@ public class Main {
     // The path of the csv file declared as a field to grant access to every method
     static String path = "src/main/resources/transactions.csv";
 
-
-
-
     public static void main(String[] args) {
-
         transactionList = readTransactionFile(path);
+        Collections.sort(transactionList);
         mainMenu();
 
-
     }
-
     public static void mainMenu() {
         boolean working = true;
         //while loop to iterate the main menu until it's exited
@@ -96,10 +91,9 @@ public class Main {
             String transactionFormat = String.valueOf(date) + "|" + String.valueOf(time) + "|" + description + "|" + vendor + "|" + amount + "\n";
             writer.write(transactionFormat);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Error with the writer" + e);
         }
     }
-
     //A menu prompter for the ledger submenu
     public static void ledgerMenuPrompter(Scanner myScanner) {
         boolean running = true;
@@ -124,8 +118,6 @@ public class Main {
 
         }
     }
-
-
     public static ArrayList<Transaction> readTransactionFile(String path) {
         ArrayList<Transaction> transactionList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -143,7 +135,7 @@ public class Main {
 
             }
         } catch (Exception e) {
-            System.err.println("Error: " + e);
+            System.err.println("Error with the reader: " + e);
         }
         return transactionList;
     }
@@ -154,16 +146,17 @@ public class Main {
             System.out.printf("%s | %s | %s | %s | %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
         }
     }
-    public static void printDeposits(){
-        for (Transaction transaction : transactionList ) {
+
+    public static void printDeposits() {
+        for (Transaction transaction : transactionList) {
             if (transaction.getAmount() > 0) {
                 System.out.printf("%s | %s | %s | %s | %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
             }
         }
     }
-    public static void printPayments(){
+    public static void printPayments() {
         for (Transaction transaction : transactionList) {
-            if (transaction.getAmount() < 0){
+            if (transaction.getAmount() < 0) {
                 System.out.printf("%s | %s | %s | %s | %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
             }
         }
