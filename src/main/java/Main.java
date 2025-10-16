@@ -167,7 +167,7 @@ public class Main {
                     showPreviousMonth();
                     break;
                 case 3:
-                    //showYearToDate();
+                    showYearToDate();
                     break;
                 case 4:
                     showPreviousYear();
@@ -187,6 +187,7 @@ public class Main {
         LocalDate today = LocalDate.now();
         int currentMonth = today.getMonthValue();
         int currentYear = today.getYear();
+        System.out.println("Transaction for month " + currentMonth + " till date " + today.getDayOfMonth());
 
         for (Transaction transaction : transactionList){
             LocalDate transactionDate = transaction.getDate();
@@ -213,7 +214,20 @@ public class Main {
             }
         }
     }
-    public
+    public static void showYearToDate(){
+        LocalDate today = LocalDate.now();
+        int thisYear = today.getYear();
+        LocalDate firstDateOfTheYear = LocalDate.of(thisYear, 1 ,1);
+        System.out.println("Transaction for the year " + thisYear + " till " + today);
+        for (Transaction transaction : transactionList){
+            LocalDate transactionYearToDate = transaction.getDate();
+            boolean isAfterStartOfTheYear = transactionYearToDate.isAfter(firstDateOfTheYear) || transactionYearToDate.isEqual(firstDateOfTheYear);
+            boolean isBeforeTodayOrToday = transactionYearToDate.isBefore(today) || transactionYearToDate.isEqual(today);
+            if (isAfterStartOfTheYear && isBeforeTodayOrToday){
+                System.out.printf("%s | %s | %s | %s | %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+            }
+        }
+    }
     public static void showPreviousYear() {
         LocalDate today = LocalDate.now();
         int currentYear = today.getYear();
@@ -226,7 +240,4 @@ public class Main {
            }
        }
    }
-
-
-
 }
