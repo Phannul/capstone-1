@@ -161,7 +161,7 @@ public class Main {
             int menuChoice = Integer.parseInt(choice);
             switch (menuChoice) {
                 case 1:
-                    //showMonthToDate();
+                    showMonthToDate();
                     break;
                 case 2:
                     showPreviousMonth();
@@ -183,19 +183,37 @@ public class Main {
             }
         }
     }
+    public static void showMonthToDate(){
+        LocalDate today = LocalDate.now();
+        int currentMonth = today.getMonthValue();
+        int currentYear = today.getYear();
+
+        for (Transaction transaction : transactionList){
+            LocalDate transactionDate = transaction.getDate();
+            int transactionDateAndMonth = transaction.getDate().getMonthValue();
+            int transactionDateAndYear = transaction.getDate().getYear();
+
+            if(transactionDateAndYear == currentYear && transactionDateAndMonth == currentMonth){
+                if(transactionDate.isBefore(today) || transactionDate.isEqual(today)){
+                    System.out.printf("%s | %s | %s | %s | %.2f", transaction.getDate(), transaction.getCurrentTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
+                }
+            }
+        }
+
+    }
     public static void showPreviousMonth(){
         LocalDate today = LocalDate.now();
         int thisMonth = today.getMonthValue();
         int lastMonth = thisMonth - 1;
-        System.out.println("Transaction for Month " + );
+        System.out.println("Transaction for Month " + lastMonth);
         for (Transaction transaction : transactionList){
             int transactionMonth = transaction.getDate().getMonthValue();
             if (transactionMonth == lastMonth){
                 System.out.printf("%s | %s | %s | %s | %.2f", transaction.getDate(), transaction.getCurrentTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
             }
         }
-
     }
+    public
     public static void showPreviousYear() {
         LocalDate today = LocalDate.now();
         int currentYear = today.getYear();
