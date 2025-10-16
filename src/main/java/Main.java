@@ -50,9 +50,10 @@ public class Main {
 
             switch (userInput) {
                 case "D":
-                    enterDeposit();
+                    makeTransactions(true);
                     break;
                 case "P":
+                    makeTransactions(false);
                     break;
                 case "L":
                     ledgerMenuPrompter(myScanner);
@@ -69,7 +70,7 @@ public class Main {
 
     }
 
-    public static void enterDeposit() {
+    public static void makeTransactions(boolean isPositive) {
         System.out.println("Enter date:");
         String userInput = myScanner.nextLine();
         LocalDate date = LocalDate.parse(userInput);
@@ -83,41 +84,37 @@ public class Main {
         System.out.println("Enter amount");
         userInput = myScanner.nextLine();
         double amount = Double.parseDouble(userInput);
+        if (!isPositive){
+            amount = amount * -1;
+        }
 
         Transaction newTransaction = new Transaction(date, time, description, vendor, amount);
         transactionList.add(newTransaction);
 
 
-        //blah
-        writeTransactionFile();
-    }
 
-    public static void writeTransactionFile() {
-
-
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
-            for (Transaction transaction : transactionList) {
-                String transactionLine = transaction.getDate() + "|" + transaction.getCurrentTime() + "|" + transaction.getDescription() + "|" + transaction.getVendor() + "|" + transaction.getAmount();
-                writer.write(transactionLine);
-                writer.newLine();
-            }
+        //writeTransactionFile();
+        try(FileWriter writer = new FileWriter(path, true)) {
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+            String tranString = String.valueOf(date) + "|" + String.valueOf(time) + "|" + description + "|" + vendor + "|" + amount;
+            bufferedWriter.write(tranString);
+            bufferedWriter.newLine();
+            bufferedWriter.close();
         } catch (Exception e) {
-            System.err.println("Error1:" + e);
+            System.out.println(e);
         }
     }
+
 
     public static void ledgerMenuPrompter(Scanner myScanner) {
 
 
         boolean running = true;
         while (running) {
-            System.out.println("A) ALL\nD) Depositis\nP) Payments \nR) Reports\nH) Home ");
+            System.out.println("A) ALL\nD) Deposits\nP) Payments \nR) Reports\nH) Home ");
             String choice = myScanner.nextLine();
             if (choice.equalsIgnoreCase("A")) {
                 printTransactions();
-
-
             } else if (choice.equalsIgnoreCase("D")) {
                 System.out.println("showDeposits");
             } else if (choice.equalsIgnoreCase("P")) {
