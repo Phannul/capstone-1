@@ -58,10 +58,10 @@ public class Main {
         /* using a scanner to create the prompter that asks the user to input
         the needed information
          */
-        System.out.println("Enter date:");
+        System.out.println("Enter date (yyy-MM-dd):");
         String userInput = myScanner.nextLine();
         LocalDate date = LocalDate.parse(userInput);
-        System.out.println("Enter time:");
+        System.out.println("Enter time(HH:mm:ss):");
         userInput = myScanner.nextLine();
         LocalTime time = LocalTime.parse(userInput);
         System.out.println("Enter description");
