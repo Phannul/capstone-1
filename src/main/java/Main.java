@@ -11,7 +11,6 @@ public class Main {
     static Scanner myScanner = new Scanner(System.in);
     // The path of the csv file declared as a field to grant access to every method
     static String path = "src/main/resources/transactions.csv";
-
     public static void main(String[] args) {
         transactionList = readTransactionFile(path);
         Collections.sort(transactionList);
