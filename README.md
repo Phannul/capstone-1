@@ -24,4 +24,25 @@ This is a simple CLI based Java code that allows a user to read and write their 
 - 
 ## How to use
 - when you run the code you will have this main menu screen
-![](/Users/phannu/Desktop/Screenshot 2025-10-16 at 9.01.01 PM.png)
+![](Images/Screenshot 2025-10-16 at 9.01.01 PM.png)
+- upon entering D into the console it will lead to the below screen
+![img.png](img.png)
+- After you enter the date in iso format (yyyy-MM-dd) it will prompt you to enter:
+    - time also in iso fromat (HH:mm:ss)
+    - description
+    - vendor
+    - amount
+![](Images/img_1.png)
+    - this will add the transaction into the csv file
+
+**Note: option payment also does the same thing but saves the amount as a Negative**
+- The ledger option lets you read the transactions wirtten in the csv file by offering different filters to choose from, filters on which transaction to print into the console
+![](Images/img_2.png)
+- The Reports subsection in the ledger menu offers deeper filters to print the desired transactions and also allows users to search a transaction using the vendors name
+  ![](Images/img_3.png)
+
+## Author
+**Fanuel Birhane**
+Sectioin 3 , Software Pathway
+YUU Dallas,Texas
+Email- fbirhane@my.yearupunited.org
