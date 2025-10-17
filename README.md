@@ -21,6 +21,7 @@ This is a simple CLI based Java code that allows a user to read and write their 
 - Classes: Main.java and Transaction.java
 - Storage File: csv
 - Code Space: InteliJ 
+- 
 ## How to use
 - when you run the code you will have this main menu screen
 ![](/Users/phannu/Desktop/Screenshot 2025-10-16 at 9.01.01 PM.png)
