@@ -16,6 +16,7 @@ public class Main {
         Collections.sort(transactionList);
         mainMenu();
 
+
     }
     public static void mainMenu() {
         boolean working = true;
