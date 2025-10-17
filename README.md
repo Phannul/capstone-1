@@ -41,6 +41,9 @@ This is a simple CLI based Java code that allows a user to read and write their 
 - The Reports subsection in the ledger menu offers deeper filters to print the desired transactions and also allows users to search a transaction using the vendors name
   ![](Images/img_3.png)
 
+## Interesting Code Snippet
+![](Images/img_4.png)
+- this sorts the transaction lists in descending order in the conole
 ## Author
 **Fanuel Birhane**
 Sectioin 3 , Software Pathway
