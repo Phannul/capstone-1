@@ -15,8 +15,6 @@ public class Main {
         transactionList = readTransactionFile(path);
         Collections.sort(transactionList);
         mainMenu();
-
-
     }
     public static void mainMenu() {
         boolean working = true;
