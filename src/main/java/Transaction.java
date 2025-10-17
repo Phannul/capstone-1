@@ -11,7 +11,6 @@ public class Transaction implements Comparable<Transaction> {
     private String vendor;
     private double amount;
     // constructor to build the objects
-
     public Transaction(LocalDate date, LocalTime currentTime, String description, String vendor, double amount) {
         this.date = date;
         this.currentTime = currentTime;
@@ -20,23 +19,18 @@ public class Transaction implements Comparable<Transaction> {
         this.amount = amount;
     }
     // getters to allow the user access the private fields in an encapsulated manner
-
     public LocalDate getDate() {
         return date;
     }
-
     public LocalTime getCurrentTime() {
         return currentTime;
     }
-
     public String getDescription() {
         return description;
     }
-
     public String getVendor() {
         return vendor;
     }
-
     public double getAmount() {
         return amount;
     }

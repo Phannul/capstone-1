@@ -23,7 +23,7 @@ This is a simple CLI based Java code that allows a user to read and write their 
 - Code Space: InteliJ 
 - 
 ## How to use
-- when you run the code you will have this main menu screen
+- when you run the code you will have this main menu screen 
 ![](Images/Screenshot 2025-10-16 at 9.01.01 PM.png)
 - upon entering D into the console it will lead to the below screen
 ![img.png](img.png)

@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Scanner;
 public class Main {
     //An array list to hold all the transactions
-    private static ArrayList<Transaction> transactionList;
+     static ArrayList<Transaction> transactionList;
     // A scanner to prompt the user to input their information
     static Scanner myScanner = new Scanner(System.in);
     // The path of the csv file declared as a field to grant access to every method
@@ -51,8 +51,8 @@ public class Main {
             }
         }
     }
-    /* A parametrized method that
-
+    /* A parametrized method that prompts the user to write their transaction information
+     and save it into the csv file
      */
     public static void makeTransactions(boolean isDeposit) {
         /* using a scanner to create the prompter that asks the user to input
@@ -80,7 +80,6 @@ public class Main {
         //A transaction type variable that compiles the user inputs and able to be added into the array list
         Transaction newTransaction = new Transaction(date, time, description, vendor, amount);
         transactionList.add(newTransaction);
-
         //A writer that write the entered information into the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
             String transactionFormat = String.valueOf(date) + "|" + String.valueOf(time) + "|" + description + "|" + vendor + "|" + amount + "\n";
@@ -110,6 +109,9 @@ public class Main {
             }
         }
     }
+    /* A reader method that reads through each line on the csv file and saves them temporarily as a string  and returns an array list
+    and creates a transaction object that populates into an array list
+     */
     public static ArrayList<Transaction> readTransactionFile(String path) {
         ArrayList<Transaction> transactionList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -130,6 +132,7 @@ public class Main {
         }
         return transactionList;
     }
+    // A method that goes through all the elements in the formerly populated array list and print them into the console
     public static void printTransactions() {
 
         for (Transaction transaction : transactionList) {
@@ -137,6 +140,7 @@ public class Main {
             System.out.printf("%s | %s | %s | %s | %.2f \n", transaction.getDate(), transaction.getCurrentTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
         }
     }
+    // A method that only prints transactions with positive amount value(deposit)
     public static void printDeposits() {
         for (Transaction transaction : transactionList) {
             if (transaction.getAmount() > 0) {
@@ -144,6 +148,7 @@ public class Main {
             }
         }
     }
+    // A method that only prints transactions with negative amount value(payment)
     public static void printPayments() {
         for (Transaction transaction : transactionList) {
             if (transaction.getAmount() < 0) {
@@ -151,6 +156,7 @@ public class Main {
             }
         }
     }
+    // A menu to allow user the type of report they want to see
     public static void showReports(Scanner myScanner) {
         boolean running = true;
         while (running) {
@@ -181,6 +187,7 @@ public class Main {
             }
         }
     }
+    //shows the reports in the span of current month up to date
     public static void showMonthToDate(){
         LocalDate today = LocalDate.now();
         int currentMonth = today.getMonthValue();
@@ -189,10 +196,10 @@ public class Main {
 
         for (Transaction transaction : transactionList){
             LocalDate transactionDate = transaction.getDate();
-            int transactionDateAndMonth = transaction.getDate().getMonthValue();
-            int transactionDateAndYear = transaction.getDate().getYear();
+            int transactionMonth = transaction.getDate().getMonthValue();
+            int transactionYear = transaction.getDate().getYear();
 
-            if(transactionDateAndYear == currentYear && transactionDateAndMonth == currentMonth){
+            if(transactionYear == currentYear && transactionMonth == currentMonth){
                 if(transactionDate.isBefore(today) || transactionDate.isEqual(today)){
                     System.out.printf("%s | %s | %s | %s | %.2f", transaction.getDate(), transaction.getCurrentTime(), transaction.getVendor(), transaction.getDescription(), transaction.getAmount());
                 }
